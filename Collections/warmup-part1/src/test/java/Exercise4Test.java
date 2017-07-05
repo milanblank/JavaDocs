@@ -1,7 +1,10 @@
 import exercise.exercise4.MyImplementedList;
+import exercise.exercise4.MyImplementedListIndexOutOfBoundsException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
 
 /**
  * //TODO Uncomment those lines after developing the {@link MyImplementedList} methods.
@@ -27,17 +30,17 @@ public class Exercise4Test {
      * The add(Object o_O) method should work before executing a test!
      */
     private void populateLists() {
-//        testingStringValues.add("Testing ");
-//        testingStringValues.add("the ");
-//        testingStringValues.add("current ");
-//        testingStringValues.add("list!");
-//        testingStringValues.add("Testing ");
-//        testingStringValues.add("huh?!");
+        testingStringValues.add("Testing ");
+        testingStringValues.add("the ");
+        testingStringValues.add("current ");
+        testingStringValues.add("list!");
+        testingStringValues.add("Testing ");
+        testingStringValues.add("huh?!");
 
-//        testingIntegerValues.add(0);
-//        testingIntegerValues.add(1);
-//        testingIntegerValues.add(2);
-//        testingIntegerValues.add(3);
+        testingIntegerValues.add(0);
+        testingIntegerValues.add(1);
+        testingIntegerValues.add(2);
+        testingIntegerValues.add(3);
     }
 
     @Test
@@ -51,18 +54,25 @@ public class Exercise4Test {
     }
 
     @Test
-    public void testRemoveMethodOverStringList() {
-//        testingStringValues.remove(1);
-//        Assert.assertTrue(testingStringValues.size() == 5);
+    public void testRemoveMethodOverStringList() throws MyImplementedListIndexOutOfBoundsException {
+        testingStringValues.remove(1);
+        Assert.assertTrue(testingStringValues.size() == 5);
     }
 
     @Test
     public void testIsEmptyMethodOverIntegerList() {
+        // TODO change for loop with iterator
+        Iterator it = testingIntegerValues.iterator();
+
+        while (it.hasNext()){
+            Integer i = (Integer)it.next();
+            it.remove();
+        }
 //        for (int i = 0; i < testingIntegerValues.size(); i++) {
 //            testingIntegerValues.remove(i);
 //        }
 
-//        Assert.assertTrue(testingIntegerValues.isEmpty());
+        Assert.assertTrue(testingIntegerValues.isEmpty());
     }
 
     @Test
@@ -76,14 +86,14 @@ public class Exercise4Test {
     }
 
     @Test
-    public void testGetMethodOverIntegerList() {
-//        Assert.assertTrue(testingIntegerValues.get(1).compareTo(1) == 0);
+    public void testGetMethodOverIntegerList() throws MyImplementedListIndexOutOfBoundsException{
+        Assert.assertTrue(testingIntegerValues.get(1).compareTo(1) == 0);
     }
 
     @Test
-    public void testSetMethodOverStringList() {
-//        testingStringValues.set(1, "this ");
-//        Assert.assertTrue(testingStringValues.get(1).equals("this "));
+    public void testSetMethodOverStringList() throws MyImplementedListIndexOutOfBoundsException {
+        testingStringValues.set(1, "this ");
+        Assert.assertTrue(testingStringValues.get(1).equals("this "));
     }
 
     @Test
