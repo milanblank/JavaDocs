@@ -5,7 +5,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toCollection;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -34,6 +36,10 @@ public class CollectTest {
         //TODO #C3
 
         Set<Integer> expected = new HashSet<>(Arrays.asList(2, 4, 1, 9));
+
+        noDuplicates = expected.stream().collect(Collectors.toSet());
+        //noDuplicates = expected.stream().
+
         assertThat(noDuplicates, is(expected));
     }
 
@@ -43,6 +49,8 @@ public class CollectTest {
        //TODO #C4
 
         Set<Integer> expected = new TreeSet<>(Arrays.asList(2, 4, 1, 9));
+
+        noDuplicates = expected.stream().collect(toCollection(TreeSet::new));
 
         assertThat(noDuplicates, is(expected));
         assertThat(noDuplicates, instanceOf(TreeSet.class));

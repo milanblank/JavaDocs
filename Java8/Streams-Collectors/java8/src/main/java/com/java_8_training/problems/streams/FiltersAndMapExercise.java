@@ -11,12 +11,14 @@ import static java.util.stream.Collectors.toList;
 public class FiltersAndMapExercise {
 
 
+    private static List<Person> personList;
+
     public static  List<Integer> findEvenNumbers() {
         Stream<Integer> input = Stream.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
         List<Integer> evenNumbers = new ArrayList<>();
         //TODO #1 find only the even numbers
-
+        evenNumbers = input.filter(p -> p%2 == 0).collect(toList());
 
         return evenNumbers;
 
@@ -27,7 +29,7 @@ public class FiltersAndMapExercise {
 
         List<String> personName = new ArrayList<>();
         //TODO #2 find element by given name
-
+        personName = input.filter(p -> p.equalsIgnoreCase("Jack")).collect(toList());
         return personName;
     }
 
@@ -37,13 +39,15 @@ public class FiltersAndMapExercise {
 
         List<Integer> evenNumbers = new ArrayList<>();
         //TODO #3 find all elements that are not null;
-
+        evenNumbers = input.filter(p -> p != null).collect(toList());
         return evenNumbers;
     }
 
     public static List<Person> findPersonByAgeAndName(List<Person> personList, String name, Integer age){
         List<Person> persons = new ArrayList<>();
         //TODO #4 find person by given name and age
+
+        persons = personList.stream().filter(p -> p.getName().equalsIgnoreCase(name) && p.getAge() == age).collect(toList());
 
         return persons;
     }
@@ -54,6 +58,8 @@ public class FiltersAndMapExercise {
         // HINT: use map
         List<Integer> doubleNumbers = new ArrayList<>();
 
+        doubleNumbers = input.map(p -> p * 2).collect(toList());
+
         return doubleNumbers;
     }
 
@@ -61,6 +67,7 @@ public class FiltersAndMapExercise {
         List<String> collect = new ArrayList<>();
         //TODO #6
         // HINT: use map
+        collect = personList.stream().map(Person::getName).collect(toList());
 
         return  collect;
     }
@@ -70,7 +77,7 @@ public class FiltersAndMapExercise {
         List<Integer> together = new ArrayList<>();
 
         //TODO #7  flatten the lists into one list
-
+        together = input.flatMap(p -> p.stream()).collect(toList());
 
         return together;
     }
@@ -81,6 +88,7 @@ public class FiltersAndMapExercise {
 
         int product = 1;
         //TODO #8
+        product = input.reduce(1, (acc,p) -> acc * p);
 
         return product;
     }
@@ -90,6 +98,7 @@ public class FiltersAndMapExercise {
 
         Optional<Person> personOptional = Optional.empty();
         //TODO #9
+        personOptional = personList.stream().filter(Person::isMale).findFirst();
 
         return personOptional;
     }
@@ -98,16 +107,18 @@ public class FiltersAndMapExercise {
 
         boolean overAge = false;
         //TODO #10 use allMAtch
+        overAge = personList.stream().allMatch(person -> person.getAge() < age);
 
         return overAge;
     }
 
 
     public static int findTheMinimumNumber(){
-        Stream<Integer> input =  Stream.of(5, 2, 200, 33, 150, 0);
+        Stream<Integer> input =  Stream.of(5, 2, 200, 33, 150, 6);
         //TODO #11
         // HINT: use reduce
         int min =0;
+        min = input.reduce(Integer.MAX_VALUE, Integer::min);
 
         return min;
     }
@@ -118,14 +129,17 @@ public class FiltersAndMapExercise {
         // HINT: use map and reduce
         int min = 0;
 
+        min = personList.stream().map(p -> p.getAge()).reduce(Integer.MAX_VALUE, Integer::min);
+
         return min;
     }
 
     public static double findAgeAverage(List<Person> personList){
         double sum = 0;
         //TODO #13
+        sum = personList.stream().mapToDouble(Person::getAge).sum();
 
-        return  sum/personList.size();
+        return  sum/ personList.size();
     }
 
     public static List<Nationality> findNationalityByName(List<Person> personList){
@@ -134,7 +148,8 @@ public class FiltersAndMapExercise {
 
         //TODO #14
         // HINT use startsWith() for finding the names that starts with J, and distinct() to remove duplicates
-
+        persons = personList.stream().filter(p -> p.getName().startsWith("J"))
+                .map(p -> p.getNationality()).distinct().collect(toList());
 
         return  persons;
     }
@@ -147,6 +162,8 @@ public class FiltersAndMapExercise {
         //TODO #15
         Optional<Integer> firstSquareDivisibleByThree = Optional.empty();
 
+        firstSquareDivisibleByThree = someNumbers.stream().map(p -> p*p).filter(p -> p % 3 == 0).findFirst();
+
         return firstSquareDivisibleByThree;
     }
 
@@ -155,12 +172,16 @@ public class FiltersAndMapExercise {
         int sum = 0;
         //TODO #16
 
+        sum = strings.stream().map(String::length).reduce(0,(acc, x) -> acc + x);
+
         return sum;
     }
 
     public static  int sumSalary(List<Person> personList){
         int sum =0;
         //TODO #17
+
+        sum = personList.stream().mapToInt(Person::getSalary).sum();
 
         return sum;
     }

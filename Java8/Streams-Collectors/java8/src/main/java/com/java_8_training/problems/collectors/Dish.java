@@ -38,6 +38,14 @@ public class Dish {
     public enum Type { MEAT, FISH, OTHER }
     public enum CaloricLevel { DIET, NORMAL, FAT }
 
+    public CaloricLevel groupingByCalories(){
+        if (this.getCalories() > 0 && this.getCalories() <= 400 )
+            return CaloricLevel.DIET;
+        else if (this.getCalories()>400 && this.getCalories() <= 700)
+            return CaloricLevel.NORMAL;
+        return CaloricLevel.FAT;
+    }
+
     @Override
     public String toString() {
         return name;
