@@ -15,6 +15,7 @@ public class BehaviourParameterisation {
     // The formatter should be an interface that has a method which accepts an apple and returns a string from it.
     // Use the COllections.sort() method as an example
 
+
     //TODO: can you refactor prettyPrintOnlyWeightApple to use it?
     //TODO: can you refactor prettyPrintHeavyLightApple to use it?
     //TODO: can you make prettyPrintApple generic (i.e. can work with any type not just Apple)?
@@ -25,7 +26,17 @@ public class BehaviourParameterisation {
 
         prettyPrintHeavyLightApple(inventory);
         //prettyPrintOnlyWeightApple(inventory);
-        // prettyPrintApple(inventory, ???);
+
+        System.out.println( "Func int impl");
+         prettyPrintApple(inventory, new ApplePrinterColorClass());
+
+        System.out.println(" ANonymus");
+         prettyPrintApple(inventory, new ApplePrinter() {
+             @Override
+             public void print(Apple apple) {
+                 System.out.println("My " + apple.getColor() + " apple of " + apple.getWeight() + " grams.");
+             }
+         });
     }
 
     public static void prettyPrintHeavyLightApple(List<Apple> inventory) {
@@ -37,6 +48,12 @@ public class BehaviourParameterisation {
         }
     }
 
+
+    public static void prettyPrintApple(List<Apple> inventory, ApplePrinter printer){
+        for (Apple apple : inventory) {
+            printer.print(apple);
+        }
+    }
     /**
      * Prints all the weights from the inventory one by one
      *
@@ -45,6 +62,21 @@ public class BehaviourParameterisation {
     public static void prettyPrintOnlyWeightApple(List<Apple> inventory) {
         Objects.requireNonNull(inventory, "Inventory must not be null");
         //TODO
+        for (Apple apple : inventory)
+            System.out.println("An apple of " + apple.getWeight());
     }
 
+
+}
+
+interface ApplePrinter{
+    public void print(Apple apple);
+}
+
+class ApplePrinterColorClass implements ApplePrinter {
+
+    @Override
+    public void print(Apple apple) {
+        System.out.println("A " + apple.getColor() + " apple");
+    }
 }
