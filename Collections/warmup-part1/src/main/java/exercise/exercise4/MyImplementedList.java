@@ -164,7 +164,7 @@ public class MyImplementedList<E> {
     }
 
     //TODO k) extend the current default capacity, if the number of elements in the data structure is > 75% of it
-    //TODO you should name it: void extendCapacity(int capacity) - HINT use capacity, DEFAULT_CAPACITY, LOAD_FACTOR and INCREASE_SIZE_FACTOR
+    //TODO you should name it: void extendCapacity() - HINT use capacity, DEFAULT_CAPACITY, LOAD_FACTOR and INCREASE_SIZE_FACTOR
     private void extendCapacity(){
         if(this.size / this.DEFAULT_CAPACITY > this.LOAD_FACTOR){
             capacityAfterExtending *= INCREASE_SIZE_FACTOR;
