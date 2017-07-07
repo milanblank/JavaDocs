@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d9612316-831d-408e-b885-76bffa00ee02" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Java 8 Exercise.docx" afterPath="$PROJECT_DIR$/../Java 8 Exercise.docx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/examples-and-exercises.iml" afterPath="$PROJECT_DIR$/examples-and-exercises.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/java_8_training/problems/collectors/Dish.java" afterPath="$PROJECT_DIR$/src/main/java/com/java_8_training/problems/collectors/Dish.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/java_8_training/problems/streams/FiltersAndMapExercise.java" afterPath="$PROJECT_DIR$/src/main/java/com/java_8_training/problems/streams/FiltersAndMapExercise.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/ArithmeticAndReducingCollectorsTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/ArithmeticAndReducingCollectorsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/CollectTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/CollectTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/OccurrencesTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/OccurrencesTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/PartitioningAndGroupingTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/java_8_training/problems/collectors/PartitioningAndGroupingTest.java" />
     </list>
     <ignored path="javaDay.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -979,8 +970,16 @@
       <workItem from="1499110201210" duration="29566000" />
       <workItem from="1499279101843" duration="8631000" />
       <workItem from="1499319957793" duration="381000" />
-      <workItem from="1499339857420" duration="12317000" />
+      <workItem from="1499339857420" duration="12406000" />
     </task>
+    <task id="LOCAL-00001" summary="Streams and Collectors tasks completed">
+      <created>1499353374157</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1499353374157</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1016,7 +1015,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72121000" />
+    <option name="totallyTimeSpent" value="72210000" />
   </component>
   <component name="TodoView" selected-index="4">
     <todo-panel id="selected-file">
@@ -1040,7 +1039,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35425383" sideWeight="0.57390743" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13172042" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35425383" sideWeight="0.42609254" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35425383" sideWeight="0.42609254" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1080,7 +1079,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Streams and Collectors tasks completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Streams and Collectors tasks completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
