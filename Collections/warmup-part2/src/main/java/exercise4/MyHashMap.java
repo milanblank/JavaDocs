@@ -80,7 +80,6 @@ public class MyHashMap {
 
     public String remove(String key) {
         // TODO Returns the value associated with the key removed from the map or null if the key wasn't found
-
         int bucketNumber = 0;
         if(key != null) {
             bucketNumber = Math.abs(key.hashCode()) % BUCKET_ARRAY_SIZE;
@@ -149,12 +148,27 @@ public class MyHashMap {
 
     public Set<MyEntry> entrySet() {
         // TODO Return a Set containing all the Entry objects
-
-        return null;
+        Set<MyEntry> myEntrySet = new HashSet<MyEntry>();
+        for (LinkedList<MyEntry> bucket: buckets) {
+            ListIterator<MyEntry> it = bucket.listIterator();
+            while (it.hasNext()){
+                myEntrySet.add(it.next());
+            }
+        }
+        return myEntrySet;
     }
 
     public boolean isEmpty() {
         // TODO
+        Set<MyEntry> myEntrySet = new HashSet<MyEntry>();
+        for (LinkedList<MyEntry> bucket: buckets) {
+            ListIterator<MyEntry> it = bucket.listIterator();
+            while (it.hasNext()){
+                myEntrySet.add(it.next());
+            }
+        }
+        if (myEntrySet.isEmpty())
+            return true;
         return false;
     }
 
