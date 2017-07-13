@@ -41,16 +41,18 @@ public class Department {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if(obj == null || this.getClass() != obj.getClass())
+        if (this == obj) return true;
+        if (obj == null || this.getClass() != obj.getClass())
             return false;
 
         Department o = (Department) obj;
 
-        if(this.getId() == o.getId()
+        if (this.getId() == o.getId()
                 && this.getDepartmentName().equals(o.departmentName)
                 && location.equals(o))
             return true;
+
+        return false;
     }
 
     @Override

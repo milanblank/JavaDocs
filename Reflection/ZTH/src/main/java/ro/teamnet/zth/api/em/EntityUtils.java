@@ -35,7 +35,7 @@ public class  EntityUtils {
                        || annotClass.equals(Column.class)){
                    columnInfo = new ColumnInfo();
 //                   columnInfo.setColumnName(field.getName());
-//                   columnInfo.setColumnType(();
+                   columnInfo.setColumnType(field.getType());
 //                   columnInfo.setId(false);
 //                   if(annotInstance.equals(Id.class))
 //                       columnInfo.setId(true);

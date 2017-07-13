@@ -1,13 +1,9 @@
 package ro.teamnet.zth.api.em;
 
-/**
- * Created by Milan on 13-Jul-17.
- */
 public class ColumnInfo {
-
-    private String columnName;
+    private String columnName; // id java name
     private Class columnType;
-    private String dbColumnName;
+    private String dbColumnName; // department_id database name
     private boolean isId;
     private Object value;
 
