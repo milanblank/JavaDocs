@@ -265,6 +265,12 @@ public class EntityManagerImpl implements EntityManager {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
 

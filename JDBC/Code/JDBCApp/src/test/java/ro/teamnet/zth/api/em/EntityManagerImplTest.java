@@ -36,6 +36,11 @@ public class EntityManagerImplTest {
     }
 
 
+//    @Table
+//    public void testInsert(){
+//
+//    }
+
     @Test
     public void testFindAll(){
         Department department = new Department();
@@ -74,7 +79,7 @@ public class EntityManagerImplTest {
 
         department.setId(new Long(270));
         department.setDepartmentName("Payroll");
-        department.setLocation(new Long(1700));
+        department.setLocation(new Long(2500));
 
         entityManager.delete(department);
 
