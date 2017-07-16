@@ -22,13 +22,13 @@ public class EntityManagerImpl implements EntityManager {
     public <T> T findById(Class<T> entityClass, Long id) {
         Connection conn = DBManager.getConnection();
         String tableName = EntityUtils.getTableName(entityClass);
-        List<ColumnInfo> columnInfos = EntityUtils.getColumns(entityClass);
+        List<ColumnInfo> columns = EntityUtils.getColumns(entityClass);
 
         Condition condition = new Condition();
 
-        for (ColumnInfo columnInfo: columnInfos) {
-            if (columnInfo.isId()){
-                condition.setColumnName(columnInfo.getDbColumnName());
+        for (ColumnInfo column: columns) {
+            if (column.isId()){
+                condition.setColumnName(column.getDbColumnName());
                 condition.setValue(id);
 
             }
@@ -36,7 +36,9 @@ public class EntityManagerImpl implements EntityManager {
 
         QueryBuilder queryBuilder = new QueryBuilder();
 
-        queryBuilder.setQueryType(QueryType.SELECT).addQueryColumns(columnInfos).setTableName(tableName)
+        queryBuilder.setQueryType(QueryType.SELECT)
+                .addQueryColumns(columns)
+                .setTableName(tableName)
                 .addCondition(condition);
         String query = queryBuilder.createQuery();
         //    "SELECT DEPARTMENT_NAME, ID FROM DEPARTAMENTS WHERE DEPARTMENT_ID = 1"
@@ -48,10 +50,10 @@ public class EntityManagerImpl implements EntityManager {
             ResultSet resultSet = stmt.executeQuery(query);
             if (resultSet.next()){
                 t = entityClass.newInstance();
-                for (ColumnInfo columnInfo: columnInfos) {
-                    Field declaredField = t.getClass().getDeclaredField(columnInfo.getColumnName());
-                    declaredField.setAccessible(true);
-                    declaredField.set(t,EntityUtils.castFromSqlType(resultSet.getObject(columnInfo.getDbColumnName()), declaredField.getType()));
+                for (ColumnInfo column: columns) {
+                    Field field = t.getClass().getDeclaredField(column.getColumnName());
+                    field.setAccessible(true);
+                    field.set(t,EntityUtils.castFromSqlType(resultSet.getObject(column.getDbColumnName()), field.getType()));
                 }
             }
         } catch (SQLException e) {
@@ -69,18 +71,28 @@ public class EntityManagerImpl implements EntityManager {
 
     public long getNextIdVal(String tableName, String columnIdName) {
         Connection conn = DBManager.getConnection();
+        long id;
         try {
             Statement stmt = conn.createStatement();
 
            // query: SELECT max(location_id) FROM locations;
             String query = "SELECT MAX(" + columnIdName + ") FROM " + tableName ;
 
+
             ResultSet resultSet = stmt.executeQuery(query);
-            long result = resultSet.getLong(0) + 1;
+            resultSet.next();
+            long result = resultSet.getLong(1) + 10;
             return result;
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         return 0;
@@ -201,6 +213,7 @@ public class EntityManagerImpl implements EntityManager {
 
             Statement stmt = conn.createStatement();
             int numberOfRowsAffected = stmt.executeUpdate(query);
+            System.out.println(numberOfRowsAffected + " rows affected");
 
             T t = (T) findById(entity.getClass(), id);
             return t;
@@ -222,31 +235,35 @@ public class EntityManagerImpl implements EntityManager {
         String tableName = EntityUtils.getTableName(entity.getClass());
         List<ColumnInfo> columns = EntityUtils.getColumns(entity.getClass());
         try {
+            Condition condition = new Condition();
+
             for (ColumnInfo column : columns) {
                 Field field = entity.getClass().getDeclaredField(column.getColumnName());
                 field.setAccessible(true);
-                Object value = field.get(entity); // field.get(Object object) returns the value of the field represented by this Field, on the specified object.
-                field.set(entity, value);
+                Object value = field.get(entity);
+
+                if(column.isId()) {
+                    condition.setColumnName(column.getDbColumnName());
+                    condition.setValue(value);
+                }
             }
-
-            List<Field> idFields = EntityUtils.getFieldsByAnnotations(entity.getClass(), Id.class);
-
-            Condition condition = new Condition();
-            condition.setValue(idFields.get(0).get(entity));
 
             QueryBuilder queryBuilder = new QueryBuilder();
             queryBuilder.setQueryType(QueryType.DELETE)
                     .setTableName(tableName)
                     .addCondition(condition);
+
             String query = queryBuilder.createQuery();
+
             Statement stmt = conn.createStatement();
-            stmt.executeQuery(query);
+            int i = stmt.executeUpdate(query);
+            System.out.println(i + " rows affected");
 
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 

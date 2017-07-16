@@ -9,6 +9,8 @@ import java.util.ListIterator;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
 /**
  * Created by Milan.Stojiljkovic on 7/13/2017.
  */
@@ -24,11 +26,14 @@ public class EntityManagerImplTest {
         assertEquals( "Administration", department.getDepartmentName());
     }
 
-//    @Test
-//    public void testGetNextIdVal(){
-//        Department department = new Department();
-//        EntityManagerImpl entityManager = new EntityManagerImpl();
-//    }
+    @Test
+    public void testGetNextIdVal(){
+        EntityManagerImpl entityManager = new EntityManagerImpl();
+
+        long nextIdVal = entityManager.getNextIdVal("departments", "department_id");
+
+        assertEquals(280, nextIdVal);
+    }
 
 
     @Test
@@ -50,26 +55,35 @@ public class EntityManagerImplTest {
     public void testUpdate(){
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
-        Department byId = entityManager.findById(Department.class, new Long(25));
-        byId.setDepartmentName("Marketing2");
-        entityManager.update(byId);
+        Department marketing = entityManager.findById(Department.class, new Long(20));
+        marketing.setDepartmentName("Marketing2");
 
-        Department byId2 = entityManager.findById(Department.class, new Long(25));
-        String departmentName = byId2.getDepartmentName();
+        entityManager.update(marketing);
+
+        Department marketing2 = entityManager.findById(Department.class, new Long(20));
+        String departmentName = marketing2.getDepartmentName();
 
         assertEquals("Marketing2", departmentName);
 
     }
 
-//    @Test
-//    public void testDelete(){
-//        Department department = new Department();
-//        EntityManagerImpl entityManager = new EntityManagerImpl();
-//    }
+    @Test
+    public void testDelete(){
+        Department department = new Department();
+        EntityManagerImpl entityManager = new EntityManagerImpl();
+
+        department.setId(new Long(270));
+        department.setDepartmentName("Payroll");
+        department.setLocation(new Long(1700));
+
+        entityManager.delete(department);
+
+        assertNull(entityManager.findById(Department.class, new Long(270)));
+    }
 
     @Test
     public void testFindByParams(){
-        Department department = new Department();
+        Department department = null;
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
         Map<String, Object> params = new HashMap<>();

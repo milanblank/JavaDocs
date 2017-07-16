@@ -58,4 +58,11 @@ public class Department {
         result = 31 * result + (getLocation() != null ? getLocation().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return this.getId() + " "
+                + this.getDepartmentName() + " "
+                + this.getLocation();
+    }
 }

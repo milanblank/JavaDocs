@@ -6,3 +6,5 @@ node_modules
 .settings
 bower_components
 target
+
+out
