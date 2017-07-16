@@ -21,7 +21,7 @@ public class EntityManagerImplTest {
         Department department = new Department();
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
-        department = entityManager.findById(Department.class, new Long(10));
+        department = entityManager.findById(Department.class, 10L);
 
         assertEquals( "Administration", department.getDepartmentName());
     }
@@ -32,18 +32,33 @@ public class EntityManagerImplTest {
 
         long nextIdVal = entityManager.getNextIdVal("departments", "department_id");
 
-        assertEquals(280, nextIdVal);
+        assertEquals(270, nextIdVal);
     }
 
 
-//    @Table
+//    @Test
 //    public void testInsert(){
+//
+//        Department department = new Department();
+//        EntityManagerImpl entityManager = new EntityManagerImpl();
+//
+//        long department_id = entityManager.getNextIdVal("departments", "department_id");
+//
+//        department.setId(department_id);
+//        department.setDepartmentName("RR");
+//        department.setLocation(1700L);
+//
+//
+//        entityManager.insert(department);
+//
+//        Department rr = entityManager.findById(department.getClass(), department_id);
+//
+//        assertEquals("RR", rr.getDepartmentName());
 //
 //    }
 
     @Test
     public void testFindAll(){
-        Department department = new Department();
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
         List<Department> all = entityManager.findAll(Department.class);
@@ -60,12 +75,12 @@ public class EntityManagerImplTest {
     public void testUpdate(){
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
-        Department marketing = entityManager.findById(Department.class, new Long(20));
+        Department marketing = entityManager.findById(Department.class, 20L);
         marketing.setDepartmentName("Marketing2");
 
         entityManager.update(marketing);
 
-        Department marketing2 = entityManager.findById(Department.class, new Long(20));
+        Department marketing2 = entityManager.findById(Department.class, 20L);
         String departmentName = marketing2.getDepartmentName();
 
         assertEquals("Marketing2", departmentName);
@@ -77,9 +92,9 @@ public class EntityManagerImplTest {
         Department department = new Department();
         EntityManagerImpl entityManager = new EntityManagerImpl();
 
-        department.setId(new Long(270));
+        department.setId(270L);
         department.setDepartmentName("Payroll");
-        department.setLocation(new Long(2500));
+        department.setLocation(2500L);
 
         entityManager.delete(department);
 

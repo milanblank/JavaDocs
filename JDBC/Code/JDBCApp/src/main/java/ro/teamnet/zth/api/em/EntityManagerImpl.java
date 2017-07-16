@@ -76,7 +76,7 @@ public class EntityManagerImpl implements EntityManager {
             Statement stmt = conn.createStatement();
 
            // query: SELECT max(location_id) FROM locations;
-            String query = "SELECT MAX(" + columnIdName + ") FROM " + tableName ;
+            String query = "SELECT MAX(" + columnIdName + ") FROM " + tableName;
 
 
             ResultSet resultSet = stmt.executeQuery(query);
@@ -101,40 +101,42 @@ public class EntityManagerImpl implements EntityManager {
     public <T> Object insert(T entity) {
         Connection conn = DBManager.getConnection();
         String tableName = EntityUtils.getTableName(entity.getClass());
-        final List<ColumnInfo> columnInfos = EntityUtils.getColumns(entity.getClass());
+        final List<ColumnInfo> columns = EntityUtils.getColumns(entity.getClass());
         long id = 0;
-        for (ColumnInfo columnInfo: columnInfos) {
-            if (columnInfo.isId()){
-                id = getNextIdVal(tableName,columnInfo.getDbColumnName());
-                columnInfo.setValue(id);
-            } else {
-                Field declaredField = null;
-                try {
-                    declaredField = entity.getClass().getDeclaredField(columnInfo.getColumnName());
-                    declaredField.setAccessible(true);
-                    Object value = declaredField.get(entity);
-                    declaredField.set(entity, value);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+        try {
+            for (ColumnInfo column : columns) {
+                if (column.isId()) {
+                    id = getNextIdVal(tableName, column.getDbColumnName());
+                    column.setValue(id);
+                } else {
+                    Field field = entity.getClass().getDeclaredField(column.getColumnName());
+                    field.setAccessible(true);
+                    Object value = field.get(entity);
+                    field.set(entity, value);
                 }
             }
-        }
 
-        try {
             Statement stmt = conn.createStatement();
+
             QueryBuilder queryBuilder = new QueryBuilder();
             queryBuilder.setQueryType(QueryType.INSERT)
                     .setTableName(tableName)
-                    .addQueryColumns(columnInfos);
+                    .addQueryColumns(columns);
 
-            final ResultSet resultSet = stmt.executeQuery(queryBuilder.createQuery());
-            Object byId = findById(entity.getClass(), resultSet.getLong(0));
+            String query = queryBuilder.createQuery();
 
-            return byId;
+            int i = stmt.executeUpdate(query);
+            System.out.println(i + " rows affected");
+
+            Object insertedEntity = findById(entity.getClass(), id);
+
+            return insertedEntity;
 
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
