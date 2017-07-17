@@ -1,0 +1,7 @@
+
+to copy war into apache server on docker:
+$ scp -P 49200 root@192.168.99.100:/usr/local/webapps/sample
+password is root
+
+to enter into container:
+$ docker exec -it tomcat bash

@@ -1,0 +1,3 @@
+﻿>  curl -Lo ~/.docker/machine/cache/boot2docker.iso https://github.com/boot2docker/boot2docker/releases/download/v1.9.1/boot2docker.iso
+  
+>  docker-machine create --driver virtualbox default
