@@ -50,4 +50,24 @@
         <servlet-name>Import File</servlet-name>
         <url-pattern>/importFile</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Zero to Hero</servlet-name>
+        <servlet-class>ro.teamnet.zth.web.ZeroToHeroServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Zero to Hero</servlet-name>
+        <url-pattern>/zerotohero</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Info Http</servlet-name>
+        <servlet-class>ro.teamnet.zth.web.InfoHttpServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Info Http</servlet-name>
+        <url-pattern>/info</url-pattern>
+    </servlet-mapping>
 </web-app>
