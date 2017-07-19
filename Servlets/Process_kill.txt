@@ -1,0 +1,2 @@
+nestat -a -n -o | find "8080"
+taskkill /pid <process_id> /f
