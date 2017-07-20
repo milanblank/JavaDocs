@@ -87,24 +87,22 @@ public class DepartmentDaoTest {
         assertEquals("IT", IT.getDepartmentName());
         assertEquals("IT", update.getDepartmentName());
     }
-//
-//    @Test
-//    public void testDelete(){
-//        DepartmentDao dao = new DepartmentDao();
-//
-//        Department sales = new Department();
-//        sales.setId(80L);
-//        sales.setDepartmentName("Sales");
-//        sales.setLocation(2500L);
-//
-//        dao.delete(sales);
-//
-//        Department department = dao.findById(80);
-//
-//        assertNull(department);
-//        // java.sql.SQLIntegrityConstraintViolationException:
-//        // ORA-02292: integrity constraint (SYS.SYS_C007018) violated - child record found
-//    }
+
+    @Test
+    public void testDelete(){
+        DepartmentDao dao = new DepartmentDao();
+
+        Department sales = new Department();
+        sales.setId(230L);
+        sales.setDepartmentName("IT Helpdesk");
+        sales.setLocation(1700L);
+
+        dao.delete(sales);
+
+        Department department = dao.findById(230L);
+
+        assertNull(department);
+    }
 
     @Test
     public void testFindByParams(){
