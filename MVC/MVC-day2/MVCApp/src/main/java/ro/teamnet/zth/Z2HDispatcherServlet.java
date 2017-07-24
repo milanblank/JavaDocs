@@ -67,7 +67,10 @@ public class Z2HDispatcherServlet extends HttpServlet {
         //todo into JSON using ObjectMapper (jackson)
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(resp.getOutputStream(), resultToDisplay);
+//            objectMapper.writeValue(resp.getOutputStream(), resultToDisplay);
+            String resultAsString = objectMapper.writeValueAsString(resultToDisplay);
+            resp.getWriter().write(resultAsString);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
