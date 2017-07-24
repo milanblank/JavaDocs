@@ -1,0 +1,5 @@
+docker rm -f tomcat
+
+docker run --name tomcat -p 49100:8080  -p 49200:22 -e JPDA_ADDRESS=8000
+-e JDPA=TRANSPORT=dt_socket -dit -p 49000:8000 alebottea/z2h-tomcat
+/usr/local/tomcat/bin/catalina.sh jpda run
